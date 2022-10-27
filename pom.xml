@@ -9,7 +9,7 @@
     <version>1.0</version>
 
     <name>Lets Core</name>
-    <description>io.github.cozyloon.Lets is a test automation framework based on selenium Java, Rest Assured with loggers and config file property configurations.</description>
+    <description>Lets is a test automation framework based on selenium Java, Rest Assured with loggers and config file property configurations.</description>
     <url>https://github.com/cozyloon/LetsCore</url>
 
     <licenses>
