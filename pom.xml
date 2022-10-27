@@ -8,9 +8,9 @@
     <artifactId>lets-core</artifactId>
     <version>1.0</version>
 
-    <name>io.github.cozyloon.Lets Core</name>
+    <name>Lets Core</name>
     <description>io.github.cozyloon.Lets is a test automation framework based on selenium Java, Rest Assured with loggers and config file property configurations.</description>
-    <url>https://github.com/cozyloon/</url>
+    <url>https://github.com/cozyloon/LetsCore</url>
 
     <licenses>
         <license>
@@ -29,9 +29,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/cozyloon/.git</connection>
-        <developerConnection>scm:git:ssh://github.com:cozyloon/.git</developerConnection>
-        <url>https://github.com/cozyloon/</url>
+        <connection>scm:git:git://github.com/cozyloon/LetsCore.git</connection>
+        <developerConnection>scm:git:ssh://github.com:cozyloon/LetsCore.git</developerConnection>
+        <url>https://github.com/cozyloon/LetsCore</url>
     </scm>
 
     <properties>
