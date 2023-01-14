@@ -3,15 +3,11 @@ package io.github.cozyloon;
 /***************************************************************************************
  *    Title: <Lets Core>
  *    Author: <Chathumal Sangeeth>
- *    Date: <10/27/2022>
- *    Code version: <1.0>
+ *    Date: <1/14/2023>
+ *    Code version: <2.0>
  ***************************************************************************************/
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -43,7 +39,6 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
-import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,7 +66,7 @@ public class Lets {
         }
     }
 
-    static String getProperty(String key) {
+    public static String getProperty(String key) {
         if (properties == null)
             loadProperties();
 
@@ -96,80 +91,6 @@ public class Lets {
         else
             logger.log(Level.WARNING, logMessage);
     }
-
-//================= API Automation Config ======================
-
-    public static Response get(String url, String pathParameter, Map<String, ?> queryParameters, Map<String, ?> headers, Object body) {
-        RestAssured.baseURI = url;
-        RestAssured.basePath = pathParameter;
-        RequestSpecification request = RestAssured.given()
-                .queryParams(queryParameters)
-                .headers(headers)
-                .body(body)
-                .contentType(ContentType.JSON);
-
-        return request.get();
-    }
-
-    public static Response post(String url, String pathParameter, Map<String, ?> queryParameters, Map<String, ?> headers, Object body) {
-        RestAssured.baseURI = url;
-        RestAssured.basePath = pathParameter;
-        RequestSpecification request = RestAssured.given()
-                .queryParams(queryParameters)
-                .headers(headers)
-                .body(body)
-                .contentType(ContentType.JSON);
-
-        return request.post();
-    }
-
-    public static Response put(String url, String pathParameter, Map<String, ?> queryParameters, Map<String, ?> headers, Object body) {
-        RestAssured.baseURI = url;
-        RestAssured.basePath = pathParameter;
-        RequestSpecification request = RestAssured.given()
-                .queryParams(queryParameters)
-                .headers(headers)
-                .body(body)
-                .contentType(ContentType.JSON);
-
-        return request.put();
-    }
-
-    public static Response delete(String url, String pathParameter, Map<String, ?> queryParameters, Map<String, ?> headers, Object body) {
-        RestAssured.baseURI = url;
-        RestAssured.basePath = pathParameter;
-        RequestSpecification request = RestAssured.given()
-                .queryParams(queryParameters)
-                .headers(headers)
-                .body(body)
-                .contentType(ContentType.JSON);
-
-        return request.delete();
-    }
-
-    public static Response postWithFile(String url, String pathParameter, Map<String, ?> queryParameters, Map<String, ?> headers, Map<String, String> body) {
-
-        String key = "";
-        String value = "";
-
-        for (Map.Entry<String, String> entry : body.entrySet()) {
-            key = entry.getKey();
-            value = entry.getValue();
-        }
-
-        File file = new File(value);
-        RestAssured.baseURI = url;
-        RestAssured.basePath = pathParameter;
-        RequestSpecification request = RestAssured.given()
-                .queryParams(queryParameters)
-                .headers(headers)
-                .contentType(ContentType.MULTIPART)
-                .multiPart(key, file);
-
-        return request.post();
-    }
-
-    //==================== QA Automation Config ===========================
 
     public static void launchDriver(String browserType) {
         if (browserType.equalsIgnoreCase("chrome")) {
