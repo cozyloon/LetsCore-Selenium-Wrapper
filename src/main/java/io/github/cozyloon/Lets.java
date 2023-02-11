@@ -3,11 +3,10 @@ package io.github.cozyloon;
 /***************************************************************************************
  *    Title: <Lets Core>
  *    Author: <Chathumal Sangeeth>
- *    Date: <1/14/2023>
- *    Code version: <2.0>
+ *    Date: <2/11/2023>
+ *    Code version: <3.0>
  ***************************************************************************************/
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -51,7 +50,7 @@ public class Lets {
     static final String SELENIUM_GRID_URL = "http://localhost:4444";
 
     public Lets() {
-        WebDriverManager.chromedriver().setup();
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -94,35 +93,32 @@ public class Lets {
 
     public static void launchDriver(String browserType) {
         if (browserType.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("safari")) {
-            WebDriverManager.safaridriver().setup();
             driver = new SafariDriver();
             driver.manage().window().maximize();
         }
     }
+/*
+headless mode is going to deprecate
 
     public static void launchDriverWithHeadlessMode(String browserType) {
         if (browserType.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
             options.setHeadless(true);
-            driver = WebDriverManager.chromedriver().capabilities(options).create();
         } else if (browserType.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
             options.setHeadless(true);
-            driver = WebDriverManager.firefoxdriver().capabilities(options).create();
         }
     }
+*/
 
     public static void closeDriver() {
         driver.quit();
@@ -305,6 +301,9 @@ public class Lets {
         }
     }
 
+/*
+headless mode is going to deprecate
+
     public static void launchRemoteDriverHeadlessMode(String browserType) throws MalformedURLException {
         if (browserType.equalsIgnoreCase("chrome")) {
             ChromeOptions chromeOptions = new ChromeOptions();
@@ -323,6 +322,7 @@ public class Lets {
             driver.manage().window().maximize();
         }
     }
+*/
 
     public static void doubleClick(By locator) {
         WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
@@ -364,4 +364,49 @@ public class Lets {
         select.deselectAll();
     }
 
+    public static void javaScriptSend(By locator, String value) {
+        WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].value='" + value + "';", element);
+    }
+
+    public static void javaScriptBrowserWindowRefresh() {
+        ((JavascriptExecutor) driver).executeScript("history.go(0)");
+    }
+
+    public static void javaScriptCheckBoxHandle(By locator, boolean value) {
+        WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].checked=" + value + ";", element);
+    }
+
+    public static void javaScriptGenerateAlertPop(String msg) {
+        ((JavascriptExecutor) driver).executeScript("alert('" + msg + "');");
+    }
+
+    public static String javaScriptGetWebpageTitle() {
+        return ((JavascriptExecutor) driver).executeScript("return document.title;").toString();
+    }
+
+    public static String javaScriptGetDomainName() {
+        return ((JavascriptExecutor) driver).executeScript("return document.domain;").toString();
+    }
+
+    public static String javaScriptGetWebpageURL() {
+        return ((JavascriptExecutor) driver).executeScript("return document.URL;").toString();
+    }
+
+    public static String javaScriptGetWebpageHeight() {
+        return ((JavascriptExecutor) driver).executeScript("return window.innerHeight;").toString();
+    }
+
+    public static String javaScriptGetWebpageWidth() {
+        return ((JavascriptExecutor) driver).executeScript("return window.innerWidth;").toString();
+    }
+
+    public static void javaScriptPageScrollVertical(int px) {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0," + px + ")");
+    }
+
+    public static void javaScriptPageScrollVerticalToWebpageEND() {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
 }
