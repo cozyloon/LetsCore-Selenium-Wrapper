@@ -6,7 +6,7 @@
 
     <groupId>io.github.cozyloon</groupId>
     <artifactId>lets-core</artifactId>
-    <version>2.0</version>
+    <version>3.0</version>
 
     <name>Lets Core</name>
     <description>Introducing Let's Test Automation Framework - A Selenium Java with built-in loggers and config file property configurations for efficient testing.</description>
@@ -111,14 +111,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.3.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.7.2</version>
+            <version>4.8.0</version>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.ashot</groupId>
