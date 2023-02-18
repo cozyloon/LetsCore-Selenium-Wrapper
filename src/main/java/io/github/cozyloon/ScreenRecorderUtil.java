@@ -1,8 +1,8 @@
 /***************************************************************************************
  *    Title: <Lets Core>
  *    Author: <Chathumal Sangeeth>
- *    Date: <2/11/2023>
- *    Code version: <4.0>
+ *    Date: <2/18/2023>
+ *    Code version: <4.1>
  ***************************************************************************************/
 package io.github.cozyloon;
 
@@ -73,5 +73,12 @@ public class ScreenRecorderUtil extends ScreenRecorder {
 
     public static void stopRecord() throws Exception {
         screenRecorder.stop();
+    }
+    public static void deleteRecords() {
+        File directory = new File("./test-recordings/");
+        File[] files = directory.listFiles();
+        for (File file : files) {
+            file.delete();
+        }
     }
 }
