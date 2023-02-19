@@ -6,7 +6,7 @@
 
     <groupId>io.github.cozyloon</groupId>
     <artifactId>lets-core</artifactId>
-    <version>4.1</version>
+    <version>4.1.1</version>
 
     <name>Lets Core</name>
     <description>Introducing Let's Test Automation Framework - A Selenium Java with built-in loggers and config file property configurations for efficient testing.</description>
@@ -138,3 +138,4 @@
         </repository>
     </distributionManagement>
 </project>
+

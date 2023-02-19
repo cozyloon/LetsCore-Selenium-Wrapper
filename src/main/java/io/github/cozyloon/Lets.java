@@ -3,14 +3,11 @@ package io.github.cozyloon;
 /***************************************************************************************
  *    Title: <Lets Core>
  *    Author: <Chathumal Sangeeth>
- *    Date: <2/11/2023>
- *    Code version: <3.0>
+ *    Date: <2/19/2023>
+ *    Code version: <4.1.1>
  ***************************************************************************************/
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -408,5 +405,23 @@ headless mode is going to deprecate
 
     public static void javaScriptPageScrollVerticalToWebpageEND() {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
+
+    public static void openANewWindow() {
+        driver.switchTo().newWindow(WindowType.WINDOW);
+    }
+
+    public static void openANewTabWithinWindow() {
+        driver.switchTo().newWindow(WindowType.TAB);
+    }
+    public static void clickAndHold(By locator) {
+        WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(element).build().perform();
+    }
+    public static void releasePressedMouseButton(By locator) {
+        WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
+        Actions actions = new Actions(driver);
+        actions.release(element).build().perform();
     }
 }
