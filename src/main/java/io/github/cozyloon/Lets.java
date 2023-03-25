@@ -3,8 +3,8 @@ package io.github.cozyloon;
 /***************************************************************************************
  *    Title: <Lets Core>
  *    Author: <Chathumal Sangeeth>
- *    Date: <2/19/2023>
- *    Code version: <4.1.1>
+ *    Date: <3/25/2023>
+ *    Code version: <4.1.2>
  ***************************************************************************************/
 
 import org.openqa.selenium.*;
@@ -47,8 +47,9 @@ public class Lets {
     static final String SELENIUM_GRID_URL = "http://localhost:4444";
 
     public Lets() {
-
-        driver = new ChromeDriver();
+        ChromeOptions co = new ChromeOptions();
+        co.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(co);
         driver.manage().window().maximize();
     }
 
@@ -90,32 +91,37 @@ public class Lets {
 
     public static void launchDriver(String browserType) {
         if (browserType.equalsIgnoreCase("chrome")) {
-            driver = new ChromeDriver();
+            ChromeOptions co = new ChromeOptions();
+            co.addArguments("--remote-allow-origins=*");
+            driver = new ChromeDriver(co);
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
+            FirefoxOptions fo = new FirefoxOptions();
+            fo.addArguments("--remote-allow-origins=*");
+            driver = new FirefoxDriver(fo);
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
+            EdgeOptions eo = new EdgeOptions();
+            eo.addArguments("--remote-allow-origins=*");
+            driver = new EdgeDriver(eo);
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
             driver.manage().window().maximize();
         }
     }
-/*
-headless mode is going to deprecate
 
     public static void launchDriverWithHeadlessMode(String browserType) {
         if (browserType.equalsIgnoreCase("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.setHeadless(true);
+            ChromeOptions co = new ChromeOptions();
+            co.addArguments("--headless=new");
+            driver = new ChromeDriver(co);
         } else if (browserType.equalsIgnoreCase("firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            options.setHeadless(true);
+            FirefoxOptions fo = new FirefoxOptions();
+            fo.addArguments("--headless=new");
+            driver = new FirefoxDriver(fo);
         }
     }
-*/
 
     public static void closeDriver() {
         driver.quit();
@@ -298,28 +304,25 @@ headless mode is going to deprecate
         }
     }
 
-/*
-headless mode is going to deprecate
 
     public static void launchRemoteDriverHeadlessMode(String browserType) throws MalformedURLException {
         if (browserType.equalsIgnoreCase("chrome")) {
             ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setHeadless(true);
+            chromeOptions.addArguments("--headless=new");
             driver = new RemoteWebDriver(new URL(SELENIUM_GRID_URL), chromeOptions);
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("firefox")) {
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setHeadless(true);
+            firefoxOptions.addArguments("--headless=new");
             driver = new RemoteWebDriver(new URL(SELENIUM_GRID_URL), firefoxOptions);
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("edge")) {
             EdgeOptions edgeOptions = new EdgeOptions();
-            edgeOptions.setHeadless(true);
+            edgeOptions.addArguments("--headless=new");
             driver = new RemoteWebDriver(new URL(SELENIUM_GRID_URL), edgeOptions);
             driver.manage().window().maximize();
         }
     }
-*/
 
     public static void doubleClick(By locator) {
         WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
@@ -414,11 +417,13 @@ headless mode is going to deprecate
     public static void openANewTabWithinWindow() {
         driver.switchTo().newWindow(WindowType.TAB);
     }
+
     public static void clickAndHold(By locator) {
         WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
         Actions actions = new Actions(driver);
         actions.clickAndHold(element).build().perform();
     }
+
     public static void releasePressedMouseButton(By locator) {
         WebElement element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.elementToBeClickable(locator));
         Actions actions = new Actions(driver);
