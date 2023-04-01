@@ -47,9 +47,7 @@ public class Lets {
     static final String SELENIUM_GRID_URL = "http://localhost:4444";
 
     public Lets() {
-        ChromeOptions co = new ChromeOptions();
-        co.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(co);
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
@@ -91,19 +89,13 @@ public class Lets {
 
     public static void launchDriver(String browserType) {
         if (browserType.equalsIgnoreCase("chrome")) {
-            ChromeOptions co = new ChromeOptions();
-            co.addArguments("--remote-allow-origins=*");
-            driver = new ChromeDriver(co);
+            driver = new ChromeDriver();
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("firefox")) {
-            FirefoxOptions fo = new FirefoxOptions();
-            fo.addArguments("--remote-allow-origins=*");
-            driver = new FirefoxDriver(fo);
+            driver = new FirefoxDriver();
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("edge")) {
-            EdgeOptions eo = new EdgeOptions();
-            eo.addArguments("--remote-allow-origins=*");
-            driver = new EdgeDriver(eo);
+            driver = new EdgeDriver();
             driver.manage().window().maximize();
         } else if (browserType.equalsIgnoreCase("safari")) {
             driver = new SafariDriver();
